@@ -43,6 +43,7 @@
         var promise = MenuSearchService.getMatchedMenuItems();
 	if(searchT == ""){
 		console.log("Nothing found.");
+		list.checkWarning();
 	}else{
 	promise.then(function (response) {
 
@@ -52,6 +53,7 @@
         .catch(function (error) {
             console.log("Nothing found.");
         });
+		list.checkWarning();
 	}
          
       };
@@ -59,7 +61,13 @@
       list.removeItem = function (itemIndex) {
         list.found.splice(itemIndex , 1);
       };
-		
+	list.checkWarning = function(){
+			if(list.found.length > 0){
+				list.warning ="";
+			}else{
+				list.warning ="Nothing found.";
+			}
+		}	
     }   
 
 
