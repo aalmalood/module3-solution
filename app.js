@@ -9,7 +9,7 @@
  
     function foundItemsDirective() {
         var ddo = {
-          templateUrl: 'loader/itemsloaderindicator.template.html',
+          templateUrl: '/loader/itemsloaderindicator.template.html',
           scope: {
             found: '<',
             onRemove: '&'
@@ -22,14 +22,13 @@
         return ddo;
       }
 
-      function foundItemsDirectiveController() {
+    function foundItemsDirectiveController() {
         var list = this;
-		console.log("items");
       }
     
 
-    NarrowItDownController.$inject = ['$scope','MenuSearchService'];
-    function NarrowItDownController($scope,MenuSearchService) {
+    NarrowItDownController.$inject = ['MenuSearchService'];
+    function NarrowItDownController(MenuSearchService) {
       var list = this;
         
       
@@ -39,7 +38,7 @@
          promise.then(function (response) {
 
          list.found = MenuSearchService.searchTermFilter(response.data.menu_items , searchT);
-   
+			console.log("list.found " ,list.found );
          })
         .catch(function (error) {
             console.log("Nothing found.");
@@ -66,7 +65,7 @@ function MenuSearchService($http, ApiBasePath) {
     return response;
   };
 
-  service.searchTermFilter = function (data ,searchTerm) {
+  service.searchTermFilter = function (data ,searchTerm,foundItemsDirective) {
     var filterData = [];
     console.log(searchTerm, "searchTerm");
     for(var i = 0 ; i < data.length ; i++){
@@ -75,7 +74,6 @@ function MenuSearchService($http, ApiBasePath) {
             filterData.push(data[i]);
         }
     }
-    console.log("filterData " ,filterData , " searchTerm", searchTerm);
     return filterData;
   }
   //console.log("XXX" , service);
