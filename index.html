@@ -23,9 +23,9 @@
     <!-- found-items should be implemented as a component -->
 		
     <found-items class="table" title="ABCD" found-items="list.found" on-remove="list.removeItem(index)" 
-        on-remove="list.removeItem(index)>
-		
-	</found-items>
+        on-remove="list.removeItem(index)></found-items>
+	<found-menus found-items="list.found" on-remove="list.removeItem(index)"></found-menus >
+
 	
 	<div class="error" ng-if="list.found.length ==0">Nothing found.</div>
   </div>
