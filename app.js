@@ -35,17 +35,18 @@
       }
     
 
-    NarrowItDownController.$inject = ['MenuSearchService'];
-    function NarrowItDownController(MenuSearchService) {
+    NarrowItDownController.$inject = ['$scope','MenuSearchService'];
+    function NarrowItDownController($scope,MenuSearchService) {
       var list = this;
-        
-      
+      list.found = [];  
+      list.searchTerm = '';
       list.getItems = function (searchT) {
         var promise = MenuSearchService.getMatchedMenuItems();
 
          promise.then(function (response) {
 
          list.found = MenuSearchService.searchTermFilter(response.data.menu_items , searchT);
+		 console.log("list.found " , list.found);
          })
         .catch(function (error) {
             console.log("Nothing found.");
@@ -55,7 +56,7 @@
       list.removeItem = function (itemIndex) {
         list.found.splice(itemIndex , 1);
       };
-    
+		
     }   
 
 
@@ -77,6 +78,7 @@ function MenuSearchService($http, ApiBasePath) {
     for(var i = 0 ; i < data.length ; i++){
     
         if(data[i].description.includes(searchTerm)){
+			console.log("data" , data[i]);
             filterData.push(data[i]);
         }
     }
