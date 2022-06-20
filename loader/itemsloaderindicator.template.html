@@ -1,8 +1,15 @@
-
-<ol>
-    <li ng-repeat="x in list.found">
-      name : {{ x.name }} , short Name : {{x.short_name}} , description : {{x.description}}
-      <button ng-click="list.onRemove({index: $index});">Remove Item</button>
-    </li>
-  </ol>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Short name</th>
+		<th>Description</th>
+		<th>Remove</th>
+	</tr>
+	<th ng-repeat="x in list.found">
+		<td>{{ x.name }}</td>
+		<td> {{x.short_name}}</td>
+		<td> {{x.description}}</td>
+		<td> <button ng-click="list.onRemove({index: $index});"> Remove Item</button> </td>
+	</th>
+  </table>
 <div class="error" ng-if="list.found.length ==0">Nothing found.</div>
