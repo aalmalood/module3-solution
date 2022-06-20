@@ -26,14 +26,6 @@
         on-remove="list.removeItem(index)>
 		
 	</found-items>
-	<!--div>
-    <ol>
-      <li ng-repeat="x in list.found">
-        name : {{ x.name }} , short Name : {{x.short_name}} , description : {{x.description}}
-        <button ng-click="list.removeItem($index)">Remove Item</button>
-      </li>
-    </ol>
-	</div-->
   <div class="error" ng-if="list.found.length ==0">Nothing found.</div>
   </div>
 
