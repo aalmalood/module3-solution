@@ -80,7 +80,7 @@ function MenuSearchService($http, ApiBasePath) {
     var filterData = [];
     for(var i = 0 ; i < data.length ; i++){
     
-        if(data[i].description.toLowerCase().indexOf(searchTerm)){
+        if(data[i].description.toLowerCase().includes(searchTerm)){
 			console.log("data" , data[i]);
             filterData.push(data[i]);
         }
