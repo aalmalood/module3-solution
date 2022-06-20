@@ -1,7 +1,7 @@
 
-<ol class="loader">
-    <li ng-repeat="item in list.items">
-      name : {{ item.name }}, short Name : {{item.short_name}} , {{ item.description }}
+<ol>
+    <li ng-repeat="x in list.found">
+      name : {{ x.name }} , short Name : {{x.short_name}} , description : {{x.description}}
       <button ng-click="list.onRemove({index: $index});">Remove Item</button>
     </li>
   </ol>
