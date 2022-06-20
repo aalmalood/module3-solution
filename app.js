@@ -13,7 +13,6 @@
 			templateUrl: 'template.html',
 			scope: {
 				foundItems: '<',
-				myTitle: '@title',
 				onRemove: '&'
 			},
 			controller: foundItemsDirectiveController,
@@ -77,7 +76,7 @@ function MenuSearchService($http, ApiBasePath) {
     var filterData = [];
     for(var i = 0 ; i < data.length ; i++){
     
-        if(data[i].description.includes(searchTerm)){
+        if(data[i].description.toLowerCase().indexOf(searchTerm)){
 			console.log("data" , data[i]);
             filterData.push(data[i]);
         }
