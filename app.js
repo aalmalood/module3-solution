@@ -20,7 +20,7 @@
 			controllerAs: 'dctrl',
 			bindToController: true
         };
-      //console.log("items" , items);
+      
         return ddo;
       }
 
@@ -46,7 +46,6 @@
          promise.then(function (response) {
 
          list.found = MenuSearchService.searchTermFilter(response.data.menu_items , searchT);
-			console.log("list.found " ,list.found );
          })
         .catch(function (error) {
             console.log("Nothing found.");
@@ -75,16 +74,15 @@ function MenuSearchService($http, ApiBasePath) {
 
   service.searchTermFilter = function (data ,searchTerm,foundItemsDirective) {
     var filterData = [];
-    console.log(searchTerm, "searchTerm");
     for(var i = 0 ; i < data.length ; i++){
-        //console.log(data[i]);
+    
         if(data[i].description.includes(searchTerm)){
             filterData.push(data[i]);
         }
     }
     return filterData;
   }
-  //console.log("XXX" , service);
+  
 }
 
 
