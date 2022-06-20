@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app ="NarrowItDownApp">
   <head>
     <title>Narrow Down Your Menu Choice</title>
 
@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
   </head>
-<body ng-app ="NarrowItDownApp">
+<body >
    <div class="container"  ng-controller='NarrowItDownController as list'>
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
@@ -21,13 +21,19 @@
     </div>
 
     <!-- found-items should be implemented as a component -->
-    <!--found-items found-items="list.found" on-remove="list.removeItem(index)"></found-items-->
+		
+    <found-items  on-remove="list.removeItem(index)" found="list.found"
+        on-remove="list.removeItem(index)>
+		
+	</found-items>
+	<!--div>
     <ol>
       <li ng-repeat="x in list.found">
         name : {{ x.name }} , short Name : {{x.short_name}} , description : {{x.description}}
-        <button ng-click="list.onRemove({index: $index});">Remove Item</button>
+        <button ng-click="list.removeItem($index)">Remove Item</button>
       </li>
     </ol>
+	</div-->
   <div class="error" ng-if="list.found.length ==0">Nothing found.</div>
   </div>
 
