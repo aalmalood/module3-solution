@@ -25,7 +25,7 @@
     <found-items class="table" found-items="list.found" on-remove="list.removeItem(index)" 
         on-remove="list.removeItem(index)></found-items>
 	<found-menus found-items="list.found" on-remove="list.removeItem(index)"></found-menus >
-
+	<div class="error col-md-8" ng-if="list.found.length==0">{{list.warning}} </div>
   </div>
 
 </body>
