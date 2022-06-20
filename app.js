@@ -4,10 +4,10 @@
     angular.module('NarrowItDownApp', [])
     .controller('NarrowItDownController', NarrowItDownController)
     .service('MenuSearchService', MenuSearchService)
-    .directive('foundItems', foundItemsDirective)
+    //.directive('foundItems', foundItemsDirective)
     .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com/menu_items.json");
  
-    function foundItemsDirective() {
+    /*function foundItemsDirective() {
         var ddo = {
           templateUrl: 'loader/itemsloaderindicator.template.html',
           scope: {
@@ -24,23 +24,26 @@
 
       function foundItemsDirectiveController() {
         var list = this;
-      }
+      }*/
     
 
-    NarrowItDownController.$inject = ['MenuSearchService'];
-    function NarrowItDownController(MenuSearchService) {
+    NarrowItDownController.$inject = ['$scope','MenuSearchService'];
+    function NarrowItDownController($scope,MenuSearchService) {
       var list = this;
         
       
-      var getItems = function (searchTerm) {
+      list.getItems = function (searchT) {
         var promise = MenuSearchService.getMatchedMenuItems();
-        console.log(promise);
+        //console.log(promise);
          promise.then(function (response) {
-        list.found = response.data;
+         //response.data;
+        // console.log(searchTerm, "searchTerm");
+         list.found = MenuSearchService.searchTermFilter(response.data.menu_items , searchT);
+        console.log(list.found);
          })
-        .catch(function (error) {
+        /*.catch(function (error) {
             console.log("Nothing found.");
-        });
+        });*/
       };
 
       list.removeItem = function (itemIndex) {
@@ -54,30 +57,30 @@
 
 MenuSearchService.$inject = ['$http', 'ApiBasePath'];
 function MenuSearchService($http, ApiBasePath) {
-  var service = this;
-
+  var  service = this;
+  
   service.getMatchedMenuItems = function () {
 
     var response = $http({
       method: "GET",
       url: (ApiBasePath)
     });
-    //var data = response.data;
-    //console.log("XXX" , response);
-    //var searchTermData = searchTermFilter(data , searchTerm); 
     return response;
   };
 
   service.searchTermFilter = function (data ,searchTerm) {
     var filterData = [];
-    for(var i = 0 ; i < data.size() ; i++){
-        if(data[i].description.contains(searchTerm)){
+    console.log(searchTerm, "searchTerm");
+    for(var i = 0 ; i < data.length ; i++){
+        //console.log(data[i]);
+        if(data[i].description.includes(searchTerm)){
             filterData.push(data[i]);
         }
     }
-
+    console.log("filterData " ,filterData , " searchTerm", searchTerm);
     return filterData;
   }
+  //console.log("XXX" , service);
 }
 
 })();
