@@ -60,6 +60,7 @@
 
       list.removeItem = function (itemIndex) {
         list.found.splice(itemIndex , 1);
+	list.checkWarning();
       };
 	list.checkWarning = function(){
 			if(list.found.length > 0){
