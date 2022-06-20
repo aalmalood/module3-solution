@@ -41,8 +41,10 @@
       list.searchTerm = '';
       list.getItems = function (searchT) {
         var promise = MenuSearchService.getMatchedMenuItems();
-
-         promise.then(function (response) {
+	if(searchT == ""){
+		console.log("Nothing found.");
+	}else{
+	promise.then(function (response) {
 
          list.found = MenuSearchService.searchTermFilter(response.data.menu_items , searchT);
 		 console.log("list.found " , list.found);
@@ -50,6 +52,8 @@
         .catch(function (error) {
             console.log("Nothing found.");
         });
+	}
+         
       };
 
       list.removeItem = function (itemIndex) {
