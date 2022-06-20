@@ -10,7 +10,7 @@
     function foundItemsDirective() {
         var ddo = {
 			restrict: "E",
-			templateUrl: '/loader/template.html',
+			templateUrl: 'template.html',
 			scope: {
 				foundItems: '<',
 				myTitle: '@title',
