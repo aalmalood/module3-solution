@@ -2,28 +2,36 @@
     'use strict';
     
     angular.module('NarrowItDownApp', [])
+	.service('MenuSearchService', MenuSearchService)
     .controller('NarrowItDownController', NarrowItDownController)
-    .service('MenuSearchService', MenuSearchService)
     .directive('foundItems', foundItemsDirective)
     .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com/menu_items.json");
  
     function foundItemsDirective() {
         var ddo = {
-          templateUrl: '/loader/itemsloaderindicator.template.html',
-          scope: {
-            found: '<',
-            onRemove: '&'
-          },
-          controller: foundItemsDirectiveController,
-          controllerAs: 'list',
-          bindToController: true
+			restrict: "E",
+			templateUrl: '/loader/template.html',
+			scope: {
+				foundItems: '<',
+				myTitle: '@title',
+				onRemove: '&'
+			},
+			controller: foundItemsDirectiveController,
+			controllerAs: 'dctrl',
+			bindToController: true
         };
       //console.log("items" , items);
         return ddo;
       }
 
     function foundItemsDirectiveController() {
-        var list = this;
+        var dctrl = this;
+		dctrl.isempty = function (){
+        if (dctrl.foundItems.length === 0 && dctrl.foundItems !== 'undefined'){
+            return true;
+        }
+        return false;
+    };
       }
     
 
@@ -78,5 +86,6 @@ function MenuSearchService($http, ApiBasePath) {
   }
   //console.log("XXX" , service);
 }
+
 
 })();
