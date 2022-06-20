@@ -6,11 +6,11 @@
 		<th>Description</th>
 		<th>Remove</th>
 	</tr>
-	<th ng-repeat="x in dctrl.foundItems">
+	<tr ng-repeat="x in dctrl.foundItems">
 		<td>{{ x.name }}</td>
 		<td> {{x.short_name}}</td>
 		<td> {{x.description}}</td>
 		<td> <button ng-click="dctrl.onRemove({index: $index});"> Remove Item</button> </td>
-	</th>
+	</tr>
   </table>
 <div class="error" ng-if="dctrl.isempty()">Nothing found.</div>
